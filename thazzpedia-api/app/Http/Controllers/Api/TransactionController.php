@@ -7,10 +7,8 @@ use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use Illuminate\Http\Request;
 
-class TransactionController extends Controller
-{
-    public function index(Request $request)
-    {
+class TransactionController extends Controller {
+    public function index(Request $request) {
         $query = Transaction::with('game');
 
         if ($request->has('search') && $request->search != '') {
@@ -24,8 +22,7 @@ class TransactionController extends Controller
         return response()->json($query->paginate(10));
     }
 
-    public function store(StoreTransactionRequest $request)
-    {
+    public function store(StoreTransactionRequest $request) {
         $validated = $request->validated();
 
         if ($request->hasFile('proof_file')) {

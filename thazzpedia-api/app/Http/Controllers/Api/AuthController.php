@@ -7,10 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
-{
-    public function register(Request $request)
-    {
+class AuthController extends Controller {
+    public function register(Request $request) {
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
@@ -26,8 +24,7 @@ class AuthController extends Controller
         return response()->json(['message' => 'Register sukses!', 'user' => $user], 201);
     }
 
-    public function login(Request $request)
-    {
+    public function login(Request $request) {
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -44,8 +41,7 @@ class AuthController extends Controller
         return response()->json(['message' => 'Login sukses!', 'token' => $token]);
     }
 
-    public function logout(Request $request)
-    {
+    public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logout sukses!']);
     }
